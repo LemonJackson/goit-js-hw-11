@@ -17,20 +17,24 @@ form.addEventListener("submit", onFormSubmit);
 
 function onFormSubmit(event) {
     event.preventDefault();
+    const value = input.value.trim()
 
-    loader.classList.remove('visually-hidden')
-
-    const value = input.value.trim().toLowerCase().replaceAll(" ", "+")
-
-    if (value.length === 0) {
+    if (value === '') {
+        form.reset()
         return iziToast.error({
             message: 'Enter search image name',
             position: "topRight"
         });
+
     }
+
+
+    loader.classList.remove('visually-hidden')
+
 
     getData(value)
         .then(data => createMarkup(data))
+        .catch(error => console.log(error));
 
 
     loader.classList.add('visually-hidden')

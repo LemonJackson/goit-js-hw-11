@@ -9,5 +9,5 @@ export function getData(userInput) {
             }
             return response.json();
         })
-        .catch(error => console.log(error));
+
 }

@@ -6,9 +6,15 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 
+let lightbox = new SimpleLightbox('.gallery-link', {
+    captionsData: 'alt',
+    captionDelay: 250,
+});
+
 export function createMarkup(data) {
 
     if (data.hits.length === 0) {
+        gallery.innerHTML = ``;
         return iziToast.error({
             message: "Sorry, there are no images matching your search query. Please try again!",
             position: "topRight"
@@ -30,14 +36,7 @@ export function createMarkup(data) {
 
     gallery.insertAdjacentHTML('afterbegin', markup);
 
-    let lightbox = new SimpleLightbox('.gallery-link', {
-        captionsData: 'alt',
-        captionDelay: 250,
-    });
     lightbox.refresh()
-
-
-    return markup;
 }
 
 
